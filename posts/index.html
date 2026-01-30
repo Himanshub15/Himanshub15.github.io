@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts | Himanshu Bhusari</title>
+    <meta name="description" content="Blog posts by Himanshu Bhusari - Data Engineer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --fg: #1a1a1a;
+            --accent: #0969da;
+            --muted: #6b7280;
+            --border: #e5e5e5;
+            --surface: #f5f5f5;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #1a2332;
+            --fg: #d4dce8;
+            --accent: #e07850;
+            --muted: #8899aa;
+            --border: #2a3444;
+            --surface: #232f40;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Geist', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Header */
+        header {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Geist', -apple-system, sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--fg);
+        }
+        .logo:hover { color: var(--accent); text-decoration: none; }
+
+        nav { display: flex; align-items: center; gap: 1.5rem; }
+        nav a {
+            color: var(--muted);
+            font-size: 0.95rem;
+            padding-bottom: 2px;
+        }
+        nav a:hover {
+            color: var(--fg);
+            text-decoration: none;
+        }
+        nav a.active {
+            color: var(--fg);
+            border-bottom: 2px dashed var(--accent);
+        }
+
+        .theme-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+        }
+        .theme-btn:hover { color: var(--fg); }
+        .theme-btn svg { width: 20px; height: 20px; }
+
+        /* Main */
+        main { padding: 3rem 0 4rem; }
+
+        /* Page Title */
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Year Section */
+        .year-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .year-header {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--muted);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        /* Posts List */
+        .posts-list {
+            list-style: none;
+        }
+
+        .post-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            align-items: baseline;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-date {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--muted);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .post-title:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .post-excerpt {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .post-meta {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links { display: flex; gap: 0.5rem; }
+        .footer-links a {
+            color: var(--muted);
+            padding: 4px;
+            display: flex;
+        }
+        .footer-links a:hover { color: var(--fg); }
+        .footer-links svg { width: 18px; height: 18px; }
+
+        @media (max-width: 540px) {
+            .post-item {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            .post-date {
+                min-width: auto;
+            }
+            .footer-inner { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo">Himanshu Bhusari</a>
+                <nav>
+                    <a href="/posts" class="active">Posts</a>
+                    <a href="/about">About</a>
+                    <button class="theme-btn" id="theme-toggle" title="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Posts</h1>
+            <p class="page-subtitle">Thoughts on data, technology, and everyday observations.</p>
+
+            <div class="year-section">
+                <div class="year-header">2026</div>
+                <ul class="posts-list">
+                    <li class="post-item">
+                        <span class="post-date">Jan 30</span>
+                        <div class="post-info">
+                            <a href="/posts/two-photo-syndrome" class="post-title">The Two Photo Syndrome</a>
+                            <p class="post-excerpt">Why do we instinctively tap the shutter twice? A theory on the silent storage crisis hiding in plain sight.</p>
+                            <div class="post-meta">3 min read</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-links">
+                    <a href="https://github.com/Himanshub15" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/himanshubhusari/" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="mailto:himanshubhusari@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const saved = localStorage.getItem('theme');
+
+        if (saved) html.dataset.theme = saved;
+        else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.dataset.theme = 'light';
+
+        toggle.onclick = () => {
+            const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+            html.dataset.theme = next;
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+</html>
