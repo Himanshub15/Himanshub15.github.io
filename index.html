@@ -63,6 +63,7 @@
             transition: color 0.2s ease;
         }
         .logo:hover { color: var(--accent); text-decoration: none; }
+        .logo-short { display: none; }
 
         nav { display: flex; align-items: center; gap: 1.25rem; }
         nav a { color: var(--muted); font-size: 0.9rem; transition: color 0.2s ease; }
@@ -215,9 +216,24 @@
         .license a:hover { color: var(--accent); }
 
         @media (max-width: 540px) {
-            .hero { flex-direction: column; text-align: center; align-items: center; }
+            .logo { font-size: 0.95rem; }
+            nav { gap: 0.75rem; }
+            nav a { font-size: 0.8rem; }
+            .hero { flex-direction: column; text-align: center; align-items: center; gap: 1rem; }
+            .intro h1 { font-size: 1.25rem; justify-content: center; flex-wrap: wrap; }
+            .tagline { font-size: 0.85rem; }
             .socials { justify-content: center; }
+            .post h2 { font-size: 1rem; }
+            .post p { font-size: 0.85rem; }
             .footer-inner { flex-direction: column; gap: 1rem; }
+        }
+
+        @media (max-width: 380px) {
+            .logo-full { display: none; }
+            .logo-short { display: inline; font-size: 1.1rem; }
+            nav { gap: 0.5rem; }
+            nav a { font-size: 0.75rem; }
+            .intro h1 { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -225,7 +241,7 @@
     <header>
         <div class="container">
             <div class="header-inner">
-                <a href="/" class="logo">Himanshu Bhusari (HB)</a>
+                <a href="/" class="logo"><span class="logo-full">Himanshu Bhusari (HB)</span><span class="logo-short">HB</span></a>
                 <nav>
                     <a href="/posts">Posts</a>
                     <a href="/projects">Projects</a>
