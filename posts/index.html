@@ -197,14 +197,13 @@
         .footer-links a:hover { color: var(--fg); }
         .footer-links svg { width: 18px; height: 18px; }
 
-        @media (max-width: 540px) {
-            .post-item {
-                flex-direction: column;
-                gap: 0.25rem;
-            }
-            .post-date {
-                min-width: auto;
-            }
+        @media (max-width: 768px) {
+            .logo { font-size: 0.95rem; white-space: nowrap; }
+            nav { gap: 0.75rem; }
+            nav a { font-size: 0.85rem; }
+            .post-item { flex-direction: column; gap: 0.25rem; }
+            .post-date { min-width: auto; }
+            .post-title { font-size: 1rem; }
             .footer-inner { flex-direction: column; gap: 1rem; }
         }
     </style>
