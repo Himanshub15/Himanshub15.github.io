@@ -215,25 +215,19 @@
         .license a { color: var(--muted); }
         .license a:hover { color: var(--accent); }
 
-        @media (max-width: 540px) {
-            .logo { font-size: 0.95rem; }
-            nav { gap: 0.75rem; }
-            nav a { font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .header-inner { gap: 0.5rem; }
+            .logo-full { display: none; }
+            .logo-short { display: inline; font-size: 1.1rem; }
+            nav { gap: 0.9rem; }
+            nav a { font-size: 0.85rem; }
             .hero { flex-direction: column; text-align: center; align-items: center; gap: 1rem; }
-            .intro h1 { font-size: 1.25rem; justify-content: center; flex-wrap: wrap; }
-            .tagline { font-size: 0.85rem; }
+            .intro h1 { font-size: 1.3rem; justify-content: center; }
+            .tagline { font-size: 0.9rem; }
             .socials { justify-content: center; }
             .post h2 { font-size: 1rem; }
             .post p { font-size: 0.85rem; }
             .footer-inner { flex-direction: column; gap: 1rem; }
-        }
-
-        @media (max-width: 380px) {
-            .logo-full { display: none; }
-            .logo-short { display: inline; font-size: 1.1rem; }
-            nav { gap: 0.5rem; }
-            nav a { font-size: 0.75rem; }
-            .intro h1 { font-size: 1.1rem; }
         }
     </style>
 </head>
