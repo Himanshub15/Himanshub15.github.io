@@ -21,9 +21,9 @@
 
         html[data-theme="dark"] {
             --bg: #1a2332;
-            --fg: #f0f4f8;
-            --accent: #ff7a45;
-            --muted: #9aafc4;
+            --fg: #d4dce8;
+            --accent: #e07850;
+            --muted: #8899aa;
             --border: #2a3444;
             --surface: #232f40;
         }
@@ -41,7 +41,7 @@
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        .container { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
 
         /* Header */
         header {
@@ -56,9 +56,9 @@
         }
 
         .logo {
-            font-family: 'Geist Mono', monospace;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-family: 'Geist', -apple-system, sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
             color: var(--fg);
             transition: color 0.2s ease;
         }
@@ -288,7 +288,7 @@
                 </li>
                 <li class="post">
                     <a href="/posts/building-clipstash">
-                        <h2>Building ClipStash</h2>
+                        <h2>I Wrote a Clipboard Manager Because $10/Year Was Too Much</h2>
                         <div class="post-meta">24 Mar 2026 · 4 min</div>
                         <p>I needed a simple clipboard manager for macOS. Existing ones were bloated or paid, so I built my own with Python and rumps.</p>
                     </a>
