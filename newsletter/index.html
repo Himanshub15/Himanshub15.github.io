@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sunday Blues | Weekly AI Newsletter</title>
+    <meta name="description" content="Top 10 things that happened this week in AI. Every Sunday evening. No fluff, just the signal.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fdfdfd;
+            --fg: #282728;
+            --accent: #006cac;
+            --muted: #7a7a7a;
+            --border: #ece9e9;
+            --surface: #f3f3f3;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #212737;
+            --fg: #eaedf3;
+            --accent: #ff6b01;
+            --muted: #8a94a8;
+            --border: #2e3650;
+            --surface: #2a3347;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Geist Mono', monospace;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Header */
+        header {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--fg);
+        }
+        .logo:hover { color: var(--accent); text-decoration: none; }
+
+        nav { display: flex; align-items: center; gap: 1.25rem; }
+        nav a { color: var(--muted); font-size: 1rem; }
+        nav a:hover { color: var(--fg); text-decoration: none; }
+
+        .theme-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+        }
+        .theme-btn:hover { color: var(--fg); }
+        .theme-btn svg { width: 18px; height: 18px; }
+
+        /* Main */
+        main {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .newsletter-tagline {
+            font-size: 1.25rem;
+            color: var(--fg);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .newsletter-desc {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Subscribe Form */
+        .subscribe-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 440px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 12px 16px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.95rem;
+            background: var(--surface);
+            color: var(--fg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .subscribe-form input:focus {
+            border-color: var(--accent);
+        }
+
+        .subscribe-form input::placeholder {
+            color: var(--muted);
+        }
+
+        .subscribe-form button {
+            padding: 12px 24px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .subscribe-form button:hover {
+            opacity: 0.85;
+        }
+
+        .subscribe-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* What You Get */
+        .features {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px dashed var(--border);
+            text-align: left;
+        }
+
+        .features h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--fg);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .feature-icon {
+            color: var(--accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); }
+        footer a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .header-inner { flex-wrap: wrap; gap: 0.5rem; }
+            .logo { font-size: 0.85rem; }
+            nav { gap: 0.6rem; }
+            nav a { font-size: 0.8rem; }
+            .newsletter-title { font-size: 1.75rem; }
+            .newsletter-tagline { font-size: 1rem; }
+            .newsletter-desc { font-size: 0.9rem; }
+            .subscribe-form { flex-direction: column; }
+            .subscribe-form button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo">Himanshu Bhusari</a>
+                <nav>
+                    <a href="/posts">Posts</a>
+                    <a href="/projects">Projects</a>
+                    <a href="/about">About</a>
+                    <button class="theme-btn" id="theme-toggle" title="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="newsletter-title">AI Sunday Blues</h1>
+            <p class="newsletter-tagline">Top 10 Things That Happened This Week in AI</p>
+            <p class="newsletter-desc">
+                Every Sunday evening. The most important AI news, curated and summarized. No fluff, no hype — just the signal.
+            </p>
+
+            <form
+                class="subscribe-form"
+                action="https://buttondown.com/api/emails/embed-subscribe/aisundayblues"
+                method="post"
+                target="popupwindow"
+            >
+                <input type="email" name="email" placeholder="you@example.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p class="subscribe-note">Free. Delivered weekly. Unsubscribe anytime.</p>
+
+            <div class="features">
+                <h2>What you'll get every Sunday</h2>
+                <ul class="feature-list">
+                    <li>
+                        <span class="feature-icon">&gt;</span>
+                        <span><strong style="color: var(--fg);">10 curated stories</strong> — the most important AI news of the week, handpicked from dozens of sources</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&gt;</span>
+                        <span><strong style="color: var(--fg);">2-line summaries</strong> — know what happened and why it matters without clicking through</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&gt;</span>
+                        <span><strong style="color: var(--fg);">No noise</strong> — we filter out the hype, hot takes, and SEO spam so you don't have to</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&gt;</span>
+                        <span><strong style="color: var(--fg);">5 min read</strong> — catch up on the entire week during your Sunday coffee</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built by <a href="/">Himanshu Bhusari</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const saved = localStorage.getItem('theme');
+
+        if (saved) html.dataset.theme = saved;
+        else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.dataset.theme = 'light';
+
+        toggle.onclick = () => {
+            const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+            html.dataset.theme = next;
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+</html>
