@@ -2,29 +2,30 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How I Shipped My Own AI Chat App | Himanshu Bhusari</title>
     <meta name="description" content="How I built TuringAI — an AI chat app powered by Kimi K2.5, Next.js 15, and Vercel AI SDK v5. The story behind the weekend project.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #fafafa;
-            --fg: #1a1a1a;
-            --accent: #0969da;
-            --muted: #6b7280;
-            --border: #e5e5e5;
-            --surface: #f5f5f5;
+            --bg: #fdfdfd;
+            --fg: #282728;
+            --accent: #006cac;
+            --muted: #7a7a7a;
+            --border: #ece9e9;
+            --surface: #f3f3f3;
         }
 
         html[data-theme="dark"] {
-            --bg: #1a2332;
-            --fg: #d4dce8;
-            --accent: #e07850;
-            --muted: #8899aa;
-            --border: #2a3444;
-            --surface: #232f40;
+            --bg: #212737;
+            --fg: #eaedf3;
+            --accent: #ff6b01;
+            --muted: #8a94a8;
+            --border: #2e3650;
+            --surface: #2a3347;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,7 +56,7 @@
         }
 
         .logo {
-            font-family: 'Geist', -apple-system, sans-serif;
+            font-family: 'Atkinson Hyperlegible Next', -apple-system, sans-serif;
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--fg);
@@ -66,7 +67,7 @@
         nav a {
             color: var(--muted);
             font-size: 0.95rem;
-            font-family: 'Geist', sans-serif;
+            font-family: 'Atkinson Hyperlegible Next', sans-serif;
             border-bottom: 2px dashed transparent;
             padding-bottom: 2px;
         }
@@ -98,7 +99,7 @@
         }
 
         article h1 {
-            font-family: 'Geist', -apple-system, sans-serif;
+            font-family: 'Atkinson Hyperlegible Next', -apple-system, sans-serif;
             font-size: 2.2rem;
             font-weight: 700;
             color: var(--accent);
@@ -133,7 +134,7 @@
         }
 
         .post-content h2 {
-            font-family: 'Geist', -apple-system, sans-serif;
+            font-family: 'Atkinson Hyperlegible Next', -apple-system, sans-serif;
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--fg);
