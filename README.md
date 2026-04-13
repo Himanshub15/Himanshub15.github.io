@@ -4,7 +4,7 @@ A clean, modern personal website and blog built with pure HTML, CSS, and JavaScr
 
 ## Live Site
 
-🌐 **[himanshub15.github.io](https://himanshub15.github.io)**
+🌐 **[himanshubhusari.com](https://himanshubhusari.com)**
 
 ---
 
