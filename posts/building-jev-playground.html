@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jev Decides, Code Computes | Himanshu Bhusari</title>
+    <meta name="description" content="Jev Playground: a text box that morphs into the right card as you type, powered by TypeSafe's Jev classifier on OpenRouter and a Cloudflare Worker on a static site.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fdfdfd;
+            --fg: #282728;
+            --accent: #006cac;
+            --muted: #7a7a7a;
+            --border: #ece9e9;
+            --surface: #f3f3f3;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #212737;
+            --fg: #eaedf3;
+            --accent: #ff6b01;
+            --muted: #8a94a8;
+            --border: #2e3650;
+            --surface: #2a3347;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Geist Mono', monospace;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+
+        header { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Geist Mono', monospace; font-weight: 700; font-size: 1.2rem; color: var(--fg); }
+        .logo:hover { color: var(--accent); text-decoration: none; }
+
+        nav { display: flex; align-items: center; gap: 1.5rem; }
+        nav a { color: var(--muted); font-size: 1rem; font-family: 'Geist Mono', monospace; border-bottom: 2px dashed transparent; padding-bottom: 2px; }
+        nav a:hover { color: var(--fg); text-decoration: none; border-bottom-color: var(--muted); }
+
+        .theme-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px; display: flex; }
+        .theme-btn:hover { color: var(--fg); }
+        .theme-btn svg { width: 20px; height: 20px; }
+
+        main { padding: 3rem 0 4rem; }
+
+        .article-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px dashed var(--border); }
+        article h1 { font-family: 'Geist Mono', monospace; font-size: 2.2rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; line-height: 1.2; }
+        .post-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--muted); }
+        .post-meta svg { width: 16px; height: 16px; }
+        .post-meta span { margin-left: 0.5rem; }
+
+        .post-content { font-size: 1.05rem; }
+        .post-content p { margin-bottom: 1.5rem; }
+        .post-content h2 { font-family: 'Geist Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--fg); margin-top: 2.5rem; margin-bottom: 1rem; }
+        .post-content strong { color: var(--accent); font-weight: 600; }
+        .post-content em { font-style: italic; }
+        .post-content ul { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content code { font-family: 'Geist Mono', monospace; font-size: 0.9em; background: var(--surface, rgba(127,127,127,.12)); padding: 1px 5px; border-radius: 4px; }
+
+        .tags { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); }
+        .tags a { color: var(--muted); margin-right: 1rem; border-bottom: 1px dashed var(--muted); }
+        .tags a:hover { color: var(--accent); text-decoration: none; }
+
+        .share-section { margin-top: 2rem; padding-top: 1.5rem; }
+        .share-section p { font-style: italic; color: var(--muted); margin-bottom: 0.75rem; }
+        .share-links { display: flex; gap: 0.75rem; }
+        .share-links a { color: var(--muted); padding: 6px; display: flex; }
+        .share-links a:hover { color: var(--fg); }
+        .share-links svg { width: 22px; height: 22px; }
+
+        .back-top { display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); }
+        .back-top a { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.9rem; }
+        .back-top a:hover { color: var(--fg); text-decoration: none; }
+        .back-top svg { width: 16px; height: 16px; }
+
+        footer { padding: 1.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+        .footer-links { display: flex; gap: 0.5rem; }
+        .footer-links a { color: var(--muted); padding: 4px; display: flex; }
+        .footer-links a:hover { color: var(--fg); }
+        .footer-links svg { width: 18px; height: 18px; }
+
+        @media (max-width: 540px) {
+            article h1 { font-size: 1.7rem; }
+            .footer-inner { flex-direction: column; gap: 1rem; }
+            .share-links { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo">Himanshu Bhusari</a>
+                <nav>
+                    <a href="/posts">Posts</a>
+                    <a href="/projects">Projects</a>
+                    <a href="/about">About</a>
+                    <button class="theme-btn" id="theme-toggle" title="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <article>
+                <div class="article-header">
+                    <h1>Jev Decides, Code Computes</h1>
+                    <div class="post-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        23 Sep, 2026
+                        <span>&bull;</span>
+                        5 min read
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <p>Most LLMs I use write things. Paragraphs, SQL, commit messages. Then I came across <a href="https://openrouter.ai/~typesafe/jev-latest">Jev</a>, a model from TypeSafe on OpenRouter that doesn't write anything at all. You give it some text plus a list of typed questions, and it gives you back probabilities. That's it. No prose, no chat, no "Certainly! Here's…".</p>
+
+                    <p>That sounded boring until I realized it's exactly what most apps actually need. So I built <a href="https://himanshubhusari.com/jevplayground/">Jev Playground</a> to find out what a classifier model feels like when you put it right under your fingers.</p>
+
+                    <h2>What Jev Actually Is</h2>
+
+                    <p>Jev answers three kinds of questions about a piece of text (its "state"):</p>
+
+                    <ul>
+                        <li><strong>noul</strong> — a yes/no, returned as a probability from 0 to 1. <em>"Is this a video call?"</em> → 0.97.</li>
+                        <li><strong>choice</strong> — pick one of the options you define, with the full probability spread. <em>"Which card is this?"</em> → event 0.94, reminder 0.04, note 0.02.</li>
+                        <li><strong>score</strong> — a position on an ordered rubric. <em>"How urgent is this?"</em> on a scale from "not urgent" to "needs attention now".</li>
+                    </ul>
+
+                    <p>Your code owns the workflow. The model just answers narrow questions, and it answers all of them in parallel in a single call. For routing, ranking, verification and gating, that's a much better fit than asking a chat model to "respond in JSON, please" and hoping it listens.</p>
+
+                    <h2>The Playground</h2>
+
+                    <p>The app is one text box. As you type, it turns into whatever you meant:</p>
+
+                    <ul>
+                        <li><strong>dinner with priya friday 8pm on zoom</strong> → an event card with Friday, 8 PM, Priya and a video-call badge</li>
+                        <li><strong>buy milk, eggs, bread and coffee</strong> → a shopping checklist</li>
+                        <li><strong>split 2400 between 3</strong> → ₹800 each</li>
+                        <li><strong>minecraft diamond</strong> → a color swatch, #4AEDD9</li>
+                    </ul>
+
+                    <p>There are 19 card types in total: timers, habits, unit conversions, time zones, polls, countdowns, dice rolls and more. Every keystroke (debounced) sends the text to Jev with <strong>14 questions at once</strong>: which card, how complete the input is, is it a question, is it recurring, how urgent, the tone, is it in person or on a call, flight or train, what category the expense is, and so on.</p>
+
+                    <p>I didn't come up with the idea. It's based on <a href="https://github.com/anishfn/shapeshift">Shapeshift</a> by anishfn, an open-source Next.js app that uses TypeSafe's own SDK. I wanted it running on my own site with OpenRouter, which meant reworking how it talks to the model and where it runs.</p>
+
+                    <h2>Jev Decides, Code Computes</h2>
+
+                    <p>This is the part I liked most about the design. Jev never extracts a value. It never parses a date, adds up a bill or converts miles to kilometers. It only answers <em>what kind of thing is this?</em> and a handful of yes/no signals. Everything else is plain deterministic code: chrono-node for dates, a unit converter, a small math evaluator.</p>
+
+                    <p>That split is what makes it trustworthy. A classifier being 94% sure something is an event is fine; the worst case is the wrong card, and you can pick the right one from a "did you mean" chip. An LLM being 94% sure that 2400 ÷ 3 is 800 is not fine. As a data engineer this felt very familiar: let the fuzzy component route, let the exact component calculate.</p>
+
+                    <p>There's also a small state machine in between so the UI doesn't flicker. Raw probabilities jump around as you type half-words, so a card only switches when a challenger wins twice in a row (or is very confident), and signal badges have an on/off hysteresis band. It feels calm even though the model is being hit on every pause.</p>
+
+                    <h2>Hosting It on a Static Site</h2>
+
+                    <p>My site is GitHub Pages, which is just files. No server, which means nowhere to hide an API key, and any key shipped in JavaScript gets scraped within minutes. Shapeshift solves this with a Next.js server route, which GitHub Pages can't run.</p>
+
+                    <p>So the app is split in two:</p>
+
+                    <ul>
+                        <li><strong>The page</strong> is a Next.js static export, served from <strong>/jevplayground</strong> on this site like any other folder.</li>
+                        <li><strong>A Cloudflare Worker</strong> (about a hundred lines) holds the OpenRouter key as a secret. The browser sends it <code>{ text }</code>; the Worker adds the key, asks Jev all 14 questions, and returns a clean result.</li>
+                    </ul>
+
+                    <p>The Worker also does the boring safety work: it only accepts requests from my domain, rate-limits each visitor to 30 calls a minute using Cloudflare's built-in rate limiter, and caches identical inputs at the edge so retyping the same sentence is free. If the Worker is ever down or rate-limited, the app quietly falls back to an offline keyword classifier, so the page never breaks.</p>
+
+                    <p>Cost-wise it's basically nothing. A full 14-question call costs around <strong>$0.00002</strong>, and Cloudflare's free plan covers 100k requests a day. I put a spending cap on the OpenRouter key anyway.</p>
+
+                    <h2>What I Learned</h2>
+
+                    <p><strong>Not every AI feature needs a generative model.</strong> A huge share of "AI" in real products is really classification: route this ticket, flag this transaction, pick this template. Getting calibrated probabilities back instead of text you have to parse removes a whole class of bugs.</p>
+
+                    <p><strong>Ask many small questions, not one big one.</strong> Asking "is it a video call?" as its own yes/no is more reliable than asking the model to fill in an object with a <code>mode</code> field. And because Jev answers everything in parallel, adding a question barely changes the latency.</p>
+
+                    <p><strong>Static hosting plus a tiny edge function goes a long way.</strong> I didn't need Vercel or a backend. One Worker, one secret, one rate limit, and the static site stays exactly as simple as it was.</p>
+
+                    <p><strong>Read the response, don't assume it.</strong> OpenRouter returns <code>score</code> as an expected index on the rubric (0 to 2 for a three-step scale), not a 0–1 number. Checking one real response before wiring up the UI saved me from urgency badges that would never have turned on.</p>
+
+                    <h2>Try It</h2>
+
+                    <p>Open the <a href="https://himanshubhusari.com/jevplayground/">Jev Playground</a> and type anything. Press <strong>/</strong> to see every card type, or add <strong>?debug=1</strong> to the URL to watch the raw probabilities move as you type.</p>
+
+                    <p>The code, including the Worker, is on <a href="https://github.com/Himanshub15/jev-playground">GitHub</a>.</p>
+                </div>
+
+                <div class="tags">
+                    <a href="#"># ai</a>
+                    <a href="#"># classifiers</a>
+                    <a href="#"># nextjs</a>
+                    <a href="#"># cloudflare</a>
+                    <a href="#"># open-source</a>
+                </div>
+
+                <div class="share-section">
+                    <p>Share this post on:</p>
+                    <div class="share-links">
+                        <a href="https://twitter.com/intent/tweet?url=https://himanshubhusari.com/posts/building-jev-playground&text=Jev Decides, Code Computes" title="Share on X" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://himanshubhusari.com/posts/building-jev-playground" title="Share on LinkedIn" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="mailto:?subject=Jev Decides, Code Computes&body=Check out this post: https://himanshubhusari.com/posts/building-jev-playground" title="Share via Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="back-top">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M18 15l-6-6-6 6"/>
+                        </svg>
+                        Back to Top
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-links">
+                    <a href="https://github.com/Himanshub15" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/himanshubhusari/" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="mailto:himanshubhusari@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const saved = localStorage.getItem('theme');
+
+        if (saved) html.dataset.theme = saved;
+
+        toggle.onclick = () => {
+            const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+            html.dataset.theme = next;
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+</html>

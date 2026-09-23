@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -276,6 +276,13 @@
 
             <ul class="posts">
                 <li class="post">
+                    <a href="/posts/building-jev-playground">
+                        <h2>Jev Decides, Code Computes</h2>
+                        <div class="post-meta">23 Sep 2026 · 5 min</div>
+                        <p>A text box that morphs into the right card as you type, powered by TypeSafe's Jev classifier and a Cloudflare Worker.</p>
+                    </a>
+                </li>
+                <li class="post">
                     <a href="/posts/building-git-floww">
                         <h2>What If Git Had a Whiteboard?</h2>
                         <div class="post-meta">12 Apr 2026 · 4 min</div>
@@ -362,7 +369,6 @@
         const saved = localStorage.getItem('theme');
 
         if (saved) html.dataset.theme = saved;
-        else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.dataset.theme = 'light';
 
         toggle.onclick = () => {
             const next = html.dataset.theme === 'dark' ? 'light' : 'dark';

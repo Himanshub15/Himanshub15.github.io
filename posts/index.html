@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -239,6 +239,14 @@
                 <div class="year-header">2026</div>
                 <ul class="posts-list">
                     <li class="post-item">
+                        <span class="post-date">Sep 23</span>
+                        <div class="post-info">
+                            <a href="/posts/building-jev-playground" class="post-title">Jev Decides, Code Computes</a>
+                            <p class="post-excerpt">A text box that morphs into the right card as you type. I wired TypeSafe's Jev classifier into a static site with a Cloudflare Worker, and learned why not every AI feature needs a generative model.</p>
+                            <div class="post-meta">5 min read</div>
+                        </div>
+                    </li>
+                    <li class="post-item">
                         <span class="post-date">Apr 12</span>
                         <div class="post-info">
                             <a href="/posts/building-git-floww" class="post-title">What If Git Had a Whiteboard?</a>
@@ -349,7 +357,6 @@
         const saved = localStorage.getItem('theme');
 
         if (saved) html.dataset.theme = saved;
-        else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.dataset.theme = 'light';
 
         toggle.onclick = () => {
             const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
