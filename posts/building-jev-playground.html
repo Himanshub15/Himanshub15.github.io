@@ -163,10 +163,10 @@
                     <p>The app is one text box. As you type, it turns into whatever you meant:</p>
 
                     <ul>
-                        <li><strong>dinner with priya friday 8pm on zoom</strong> → an event card with Friday, 8 PM, Priya and a video-call badge</li>
-                        <li><strong>buy milk, eggs, bread and coffee</strong> → a shopping checklist</li>
-                        <li><strong>split 2400 between 3</strong> → ₹800 each</li>
-                        <li><strong>minecraft diamond</strong> → a color swatch, #4AEDD9</li>
+                        <li><strong>team standup monday 10am on meet</strong> → an event card with Monday, 10 AM and a video-call badge</li>
+                        <li><strong>buy coffee, batteries and limes</strong> → a shopping checklist</li>
+                        <li><strong>split $186 dinner between 4</strong> → $46.50 each</li>
+                        <li><strong>35000 feet in meters</strong> → 10,668 m, because I spend my days around aviation data</li>
                     </ul>
 
                     <p>There are 19 card types in total: timers, habits, unit conversions, time zones, polls, countdowns, dice rolls and more. Every keystroke (debounced) sends the text to Jev with <strong>14 questions at once</strong>: which card, how complete the input is, is it a question, is it recurring, how urgent, the tone, is it in person or on a call, flight or train, what category the expense is, and so on.</p>
@@ -177,7 +177,7 @@
 
                     <p>This is the part I liked most about the design. Jev never extracts a value. It never parses a date, adds up a bill or converts miles to kilometers. It only answers <em>what kind of thing is this?</em> and a handful of yes/no signals. Everything else is plain deterministic code: chrono-node for dates, a unit converter, a small math evaluator.</p>
 
-                    <p>That split is what makes it trustworthy. A classifier being 94% sure something is an event is fine; the worst case is the wrong card, and you can pick the right one from a "did you mean" chip. An LLM being 94% sure that 2400 ÷ 3 is 800 is not fine. As a data engineer this felt very familiar: let the fuzzy component route, let the exact component calculate.</p>
+                    <p>That split is what makes it trustworthy. A classifier being 94% sure something is an event is fine; the worst case is the wrong card, and you can pick the right one from a "did you mean" chip. An LLM being 94% sure that $186 ÷ 4 is $46.50 is not fine. As a data engineer this felt very familiar: let the fuzzy component route, let the exact component calculate.</p>
 
                     <p>There's also a small state machine in between so the UI doesn't flicker. Raw probabilities jump around as you type half-words, so a card only switches when a challenger wins twice in a row (or is very confident), and signal badges have an on/off hysteresis band. It feels calm even though the model is being hit on every pause.</p>
 
@@ -208,7 +208,7 @@
 
                     <h2>Try It</h2>
 
-                    <p>Open the <a href="https://himanshubhusari.com/jevplayground/">Jev Playground</a> and type anything. Press <strong>/</strong> to see every card type, or add <strong>?debug=1</strong> to the URL to watch the raw probabilities move as you type.</p>
+                    <p>Open the <a href="https://himanshubhusari.com/jevplayground/">Jev Playground</a> and type anything. Try <strong>flight to tokyo in march</strong>, <strong>9am cst in tokyo</strong> or <strong>run 100 miles this month, 34 done</strong>. Press <strong>/</strong> to see every card type, or add <strong>?debug=1</strong> to the URL to watch the raw probabilities move as you type.</p>
 
                     <p>The code, including the Worker, is on <a href="https://github.com/Himanshub15/jev-playground">GitHub</a>.</p>
                 </div>
